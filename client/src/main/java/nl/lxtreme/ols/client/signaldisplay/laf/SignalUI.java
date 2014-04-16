@@ -42,7 +42,7 @@ public class SignalUI extends ComponentUI
   // CONSTANTS
 
   /** The maximum number of points in a polyline. */
-  private static final int POINT_COUNT = 1000000;
+  private static final int POINT_COUNT = 40000000;
   /**
    * The number of samples that are shown in a single view upon which is decided
    * to draw the group summary and scope a bit sloppy.

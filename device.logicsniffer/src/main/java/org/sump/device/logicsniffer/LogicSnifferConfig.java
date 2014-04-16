@@ -339,11 +339,11 @@ public final class LogicSnifferConfig
     {
       // When the multiplexer is turned on, the upper two channel blocks are
       // disabled, leaving only 16 channels for capturing...
-      samples = getReadCounter() & 0xffff8;
+      samples = getReadCounter() & 0xffffff8;
     }
     else
     {
-      samples = getReadCounter() & 0xffffc;
+      samples = getReadCounter() & 0x1ffffffc;
     }
 
     return samples;
@@ -777,7 +777,7 @@ public final class LogicSnifferConfig
     {
       throw new IllegalArgumentException( "Sample count cannot be zero!" );
     }
-    this.size = aCount & 0xFFFFF;
+    this.size = aCount & 0xFFFFFFF;
   }
 
   /**

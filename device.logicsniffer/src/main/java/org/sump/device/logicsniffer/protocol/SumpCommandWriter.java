@@ -49,6 +49,10 @@ public class SumpCommandWriter implements SumpProtocolConstants, Closeable
   private static final int SETSIZE = 0x81;
   /** set flags */
   private static final int SETFLAGS = 0x82;
+  /** set sample count */
+  private static final int SETCOUNT = 0x83;
+  /** set sample delay */
+  private static final int SETDELAY = 0x84;
 
   /** demultiplex */
   public static final int FLAG_DEMUX = 0x00000001;
@@ -233,6 +237,26 @@ public class SumpCommandWriter implements SumpProtocolConstants, Closeable
     // set the capture size...
     sendCommand( SETSIZE, size );
 
+    // overwrite using 32-bit values (if supported)
+    final int count;
+    final int delay;
+    if ( this.config.isDoubleDataRateEnabled() )
+    {
+      count = stopCounter >> 3;
+      delay = (readCounter >> 3) - 1;
+      trigcount = (delay << 3) - (count << 3);
+    }
+    else
+    {
+      count = stopCounter >> 2;
+      delay = (readCounter >> 2) - 1;
+      trigcount = (delay << 2) - (count << 2);
+    }
+
+    // set the capture size registers...
+    sendCommand( SETCOUNT, count );
+    sendCommand( SETDELAY, delay );
+    
     int flags = 0;
     if ( this.config.isExternalClock() )
     {
