@@ -79,7 +79,8 @@ public final class LogicSnifferConfigDialog extends JDialog implements Configura
         if ( enabledGroups > 0 )
         {
           int sampleRate = getSelectedSampleRate();
-          double time = ( enabledGroups != 0 ) ? size / ( sampleRate * enabledGroups ) : 0.0;
+//          double time = ( enabledGroups != 0 ) ? size / ( sampleRate * enabledGroups ) : 0.0;
+          double time = ( enabledGroups != 0 ) ? size / sampleRate : 0.0;
 
           value = String.format( "<html>%s&nbsp;&nbsp;<span style='color:gray;font-size:0.85em;'>(%s)</span></html>",
               Unit.SizeSI.format( size ), Unit.Time.format( time ) );

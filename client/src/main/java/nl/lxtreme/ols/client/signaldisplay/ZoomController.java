@@ -532,7 +532,8 @@ public final class ZoomController
       {
         // The new width of the view is always the same as the width of the view
         // size...
-        Dimension outerViewSize = getOuterViewSize( signalDiagram, true, true );
+//        Dimension outerViewSize = getOuterViewSize( signalDiagram, true, true );
+        Dimension outerViewSize = getOuterViewSize( signalDiagram, false, true );
         visibleRect.width = outerViewSize.width;
         visibleRect.height = outerViewSize.height;
         // Since everything fits on screen, we can reset the view location to
@@ -587,6 +588,7 @@ public final class ZoomController
     {
       visibleRect.height = minimumHeight;
     }
+    
     // Try to suppress the vertical scrollbar, if possible...
     if ( visibleRect.width > currentVisibleRect.width )
     {
@@ -675,6 +677,7 @@ public final class ZoomController
     }
 
     final double width = getOuterViewSize( signalDiagram, true, true ).width;
+//    final double width = getOuterViewSize( signalDiagram, false, true ).width;
     final double length = model.getAbsoluteLength();
     final double min = 1.0 / MAX_COMP_WIDTH;
 
